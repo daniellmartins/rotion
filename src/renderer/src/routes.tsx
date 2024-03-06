@@ -11,6 +11,8 @@ export function Routes() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<BlackPage />} />
           <Route path="/document" element={<DocumentPage />} />
+
+          <Route path="*" element={<BlackPage />} />
         </Route>
       }
     />
