@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-
+import { Editor } from '../components/editor'
 import { ToC } from '../components/toc'
 
 export function DocumentPage() {
@@ -12,11 +11,17 @@ export function DocumentPage() {
 
         <ToC.Root>
           <ToC.Link>Back-end</ToC.Link>
+          <ToC.Section>
+            <ToC.Link>Node.js</ToC.Link>
+            <ToC.Link>Express</ToC.Link>
+            <ToC.Link>Prisma</ToC.Link>
+          </ToC.Section>
         </ToC.Root>
       </aside>
-      <h1>Documento</h1>
 
-      <Link to="/">Voltar</Link>
+      <section className="flex-1 flex flex-col items-center">
+        <Editor />
+      </section>
     </div>
   )
 }

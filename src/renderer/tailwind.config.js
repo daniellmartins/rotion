@@ -1,5 +1,7 @@
 import plugin from 'tailwindcss/plugin'
 
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 export const content = ['./src/**/*.tsx']
 export const theme = {
@@ -24,6 +26,7 @@ export const theme = {
   },
 }
 export const plugins = [
+  typography,
   plugin(({ addUtilities }) => {
     addUtilities({
       '.region-drag': {
