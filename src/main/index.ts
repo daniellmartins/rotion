@@ -3,6 +3,8 @@ import path from 'node:path'
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 
+import { createFileRoute, createURLRoute } from 'electron-router-dom'
+
 import icon from '../../resources/icon.png'
 
 if (process.platform === 'darwin') {
@@ -29,6 +31,16 @@ function createWindow(): void {
     },
   })
 
+  const devServerURL = createURLRoute(
+    process.env.ELECTRON_RENDERER_URL!,
+    'main',
+  )
+
+  const fileRoute = createFileRoute(
+    path.join(__dirname, '../renderer/index.html'),
+    'main',
+  )
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
@@ -41,9 +53,9 @@ function createWindow(): void {
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
-    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
+    mainWindow.loadURL(devServerURL)
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(...fileRoute)
   }
 }
 
